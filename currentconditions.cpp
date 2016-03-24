@@ -7,8 +7,8 @@
 #include "weatherutil.h"
 
 CurrentConditions::CurrentConditions(QString zip, QWidget *parent):
-    m_zip(zip),
-    QWidget(parent)
+    QWidget(parent),
+    m_zip(zip)
 {
     init();
 
@@ -16,8 +16,8 @@ CurrentConditions::CurrentConditions(QString zip, QWidget *parent):
 }
 
 CurrentConditions::CurrentConditions(QGeoCoordinate position, QWidget *parent):
-    m_position(position),
-    QWidget(parent)
+    QWidget(parent),
+    m_position(position)
 {
     init();
 
@@ -25,6 +25,7 @@ CurrentConditions::CurrentConditions(QGeoCoordinate position, QWidget *parent):
 }
 
 void CurrentConditions::init(){
+
     ////
 
     this->m_currentDateDisplay = new QLabel;
@@ -36,9 +37,7 @@ void CurrentConditions::init(){
     this->m_currentVisibilityDisplay = new QLabel;
     this->m_currentWindChillDisplay = new QLabel;
 
-
     ////
-
 
     this->m_nam = new SCNetworkAccessManager(this);
 
@@ -83,10 +82,10 @@ void CurrentConditions::slotDrawWeatherIcon(){
 }
 
 void CurrentConditions::reqCurrCond(const QString& zip){
-    /// Requests the current conditions data.
+    /// Requests the lat/lon for a given zip, and forwards reply data to the overload.
     ///
     /// The reply to the get call is handled in CurrentConditions::slotHandleNetworkReplies
-    ///  which in turn calls reqCurrentConditions(QGeoCoordinate position) using the
+    ///  which in turn calls reqCurrCond(const QGeoCoordinate& position) using the
     ///  latitude and longitude data in the reply
 
     // Request latitude and longitude data for a given zip code

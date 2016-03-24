@@ -48,6 +48,9 @@ public:
     QString m_windChill;
     QPixmap *m_weatherIcon;
 
+    QStringList m_fcPeriodName;
+    QStringList m_fcPeriodTime;
+
 private:
 
     void init();

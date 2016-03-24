@@ -24,11 +24,11 @@ const double mb_to_inhg = 0.02953;      // millibars to inHg.
 const double inhg_to_atm = 0.033421;    // inHg to standard atmosphere.
 const double atm_to_inhg = 29.9213;     // standard atmosphere to inHg.
 
-const inline double celciusToFarenheit(const double celcius){
+inline double celciusToFarenheit(const double celcius){
     return (celcius * (9.0f/5.0f)) + 32.0f;
 }
 
-const inline double farenheitToCelcius(const double farenheit){
+inline double farenheitToCelcius(const double farenheit){
     return (farenheit - 32.0f) * (5.0f/9.0f);
 }
 

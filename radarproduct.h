@@ -35,6 +35,10 @@ public:
 
     void Destroy();
 
+    RadarType m_radar_type; /// The radar type.
+
+    QString m_radar_name;   /// The radar name.
+
     QString m_radar_image_file_list_url;        /// The url for the http page that contains
                                                 /// the list of the radar image urls for the
                                                 /// radar products instance.
@@ -55,10 +59,6 @@ public:
                                                 /// are common to the radar and warning image maps.
     QList<QString> m_common_legend_warning;     /// List of QString keys to images which
                                                 /// are common to the radar, legend and warning image maps.
-
-    RadarType m_radar_type; /// The radar type.
-
-    QString m_radar_name;   /// The radar name.
 
     QMap<QString, RadarImage> m_radar;      /// The Key Ordered Map of radar images.
     QMap<QString, RadarImage> m_legend;     /// The Key Ordered Map of legend images.

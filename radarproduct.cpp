@@ -108,5 +108,6 @@ void RadarProduct::Destroy(){
 }
 
 RadarProduct::~RadarProduct(){
-    if(m_refresh_timer != nullptr) delete m_refresh_timer;
+    // TODO: Add auto refresh (use the already set aside timer m_refresh_timer)
+    //if(m_refresh_timer != nullptr) delete m_refresh_timer;
 }

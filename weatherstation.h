@@ -48,8 +48,6 @@ private:
 
     void renderRadar(QString key, QPixmap* base);
 
-    QString m_current_image_key;
-
     settings m_overlay_settings;
 
     QNetworkAccessManager *m_nam;
@@ -65,6 +63,8 @@ private:
     const QString m_station_id;     /// The NOAA defined Radar Station ID.
 
     const QString m_base_url;
+
+    QString m_current_image_key;
 
     RadarProduct* m_radar_product_N0R;
     RadarProduct* m_radar_product_N0S;
