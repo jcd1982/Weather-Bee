@@ -49,7 +49,11 @@ public:
     QPixmap *m_weatherIcon;
 
     QStringList m_fcPeriodName;
-    QStringList m_fcPeriodTime;
+    QStringList m_fcTempLabel;
+    QStringList m_fcTemperature;
+    QStringList m_fcWeather;
+    QStringList m_fcIconLink;
+    QStringList m_fcWeatherDescription;
 
 private:
 

@@ -128,27 +128,40 @@ void CurrentConditions::parseForecastJson(const QByteArray& jsonData){
     }
 
     QJsonObject obj = jdoc.object();
-    QJsonObject data = obj["time"].toObject();
-    //QJsonObject currentObservation = obj["currentobservation"].toObject();
 
-    QJsonValue value = data.value("startPeriodName");
-    QJsonArray array = value.toArray();
-    qDebug() << "JSON ARRAY";
-    foreach (const QJsonValue & v, array)
-        qDebug() << v.toString();
+    qDebug() << "JSON ARRAYS";
 
-/*
-    QByteArray jsonData = file.readAll();
-    file.close();
+    for (const QJsonValue &t : jdoc.object()["time"].toObject().value("startPeriodName").toArray()){
+        m_fcPeriodName.append(t.toString());
+        qDebug() << t.toString();
+    }
 
-    QJsonDocument jdoc = QJsonDocument::fromJson(jsonData);
-    QJsonObject obj = jdoc.object();
+    for(const QJsonValue &t : jdoc.object()["time"].toObject().value("tempLabel").toArray()){
+        m_fcTempLabel.append(t.toString());
+        qDebug() << t.toString();
+    }
 
-    QJsonValue value = obj.value("agentsArray");
-    QJsonArray array = value.toArray();
-    foreach (const QJsonValue & v, array)
-        qDebug() << v.toObject().value("ID").toInt();
-*/
+    for(const QJsonValue &t : jdoc.object()["data"].toObject().value("temperature").toArray()){
+        m_fcTemperature.append(t.toString());
+        qDebug() << t.toString();
+    }
+
+    for(const QJsonValue &t : jdoc.object()["data"].toObject().value("weather").toArray()){
+        m_fcWeather.append(t.toString());
+        qDebug() << t.toString();
+    }
+
+    for(const QJsonValue &t : jdoc.object()["data"].toObject().value("iconLink").toArray()){
+        m_fcIconLink.append(t.toString());
+        qDebug() << t.toString();
+    }
+
+    for(const QJsonValue &t : jdoc.object()["data"].toObject().value("text").toArray()){
+        m_fcWeatherDescription.append(t.toString());
+        qDebug() << t.toString();
+    }
+
+
     return;
 }
 
