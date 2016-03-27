@@ -186,6 +186,8 @@ void MainWindow::slotRadarMenu(QPoint pos){
     ///
     //////////////////////////////////////////////
 
+    bool norange = m_radar_station->getCurrentRadarProductType() == RadarType::N0Z;
+
     QMenu radarOverlayMenu(tr("Overlays"), this);
 
     QCheckBox *checkTopography = new QCheckBox("Topography", this);
@@ -202,7 +204,7 @@ void MainWindow::slotRadarMenu(QPoint pos){
     checkCounties->setStyleSheet("padding: 6px;");
     checkHighways->setStyleSheet("padding: 6px;");
     checkRivers->setStyleSheet("padding: 6px;");
-    checkRangeRing->setStyleSheet("padding: 6px;");
+    if (!norange) checkRangeRing->setStyleSheet("padding: 6px;");
     checkWarnings->setStyleSheet("padding: 6px;");
     checkLegend->setStyleSheet("padding: 6px;");
 
@@ -211,7 +213,7 @@ void MainWindow::slotRadarMenu(QPoint pos){
     checkCounties->setChecked(this->m_overlay_settings.countiesEnabled);
     checkHighways->setChecked(this->m_overlay_settings.highwaysEnabled);
     checkRivers->setChecked(this->m_overlay_settings.riversEnabled);
-    checkRangeRing->setChecked(this->m_overlay_settings.rangeEnabled);
+    if (!norange) checkRangeRing->setChecked(this->m_overlay_settings.rangeEnabled);
     checkWarnings->setChecked(this->m_overlay_settings.warningsEnabled);
     checkLegend->setChecked(this->m_overlay_settings.legendEnabled);
 
@@ -229,7 +231,7 @@ void MainWindow::slotRadarMenu(QPoint pos){
     radarCountiesAction->setDefaultWidget(checkCounties);
     radarHighwaysAction->setDefaultWidget(checkHighways);
     radarRiversAction->setDefaultWidget(checkRivers);
-    radarRangeRingAction->setDefaultWidget(checkRangeRing);
+    if (!norange) radarRangeRingAction->setDefaultWidget(checkRangeRing);
     radarWarningsAction->setDefaultWidget(checkWarnings);
     radarLegendAction->setDefaultWidget(checkLegend);
 
@@ -238,7 +240,7 @@ void MainWindow::slotRadarMenu(QPoint pos){
     radarOverlayMenu.addAction(radarCountiesAction);
     radarOverlayMenu.addAction(radarHighwaysAction);
     radarOverlayMenu.addAction(radarRiversAction);
-    radarOverlayMenu.addAction(radarRangeRingAction);
+    if (!norange) radarOverlayMenu.addAction(radarRangeRingAction);
     radarOverlayMenu.addAction(radarWarningsAction);
     radarOverlayMenu.addAction(radarLegendAction);
 
@@ -247,7 +249,7 @@ void MainWindow::slotRadarMenu(QPoint pos){
     connect(checkCounties, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(3); } );
     connect(checkHighways, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(4); } );
     connect(checkRivers, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(5); } );
-    connect(checkRangeRing, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(6); } );
+    if (!norange) connect(checkRangeRing, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(6); } );
     connect(checkWarnings, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(7); } );
     connect(checkLegend, &QCheckBox::clicked, this, [this]{ slotOverlayChanged(8); } );
 
