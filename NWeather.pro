@@ -39,8 +39,7 @@ HEADERS  += mainwindow.h \
     radartreewidget.h \
     initsettingsdialog.h
 
-FORMS    += mainwindow.ui \
-    selectradartype.ui
+FORMS    += mainwindow.ui
 
 RESOURCES += \
     weather.qrc

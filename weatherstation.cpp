@@ -271,7 +271,7 @@ QPixmap* WeatherStation::getBaseImage(){
 
         }
     }else{
-
+        qDebug() << "In paint topo enabled" << m_overlay_settings.topoEnabled;
         if( m_overlay_settings.topoEnabled ){
             painter.drawPixmap(0,0, m_topo_short.m_image);
         }

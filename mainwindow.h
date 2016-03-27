@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QButtonGroup>
 #include <QTimer>
 
 #include "weatherstation.h"
@@ -24,11 +23,13 @@ public:
 
 private:
 
+    void createMenu();
+    void initSettings();
+    void connectSignals();
+
     QSignalMapper *signalMapper;
     QMenu *radarTypeMenu;
 
-    void createMenu();
-    void initSettings();
     QMenuBar *menuBar;
     QMenu *fileMenu;
     QAction *exitAction;
@@ -38,14 +39,9 @@ private:
 
     SettingsDialog *settingsDialog;
 
-    void connectSignals();
-
     Ui::MainWindow *ui;
 
     WeatherStation* m_radar_station;
-
-    QButtonGroup* m_radio_group_radar_type;
-    QButtonGroup* m_overlays_group;
 
     std::map<QString, QList<QString>> m_map_station_list_by_state;
 
@@ -55,7 +51,6 @@ private:
 
 private slots:
 
-    void slotOverlayChecked();
     void slotDrawRadar();
     void slotRadarChanged(RadarType rt);
     void slotWeatherStationSelected(QString stationId);
@@ -64,8 +59,9 @@ private slots:
     void slotDrawBaseImage();
     void slotRadarMenu(QPoint pos);
     void slotSelectRadarType();
-
     void slotTabChanged(int i);
+
+    void slotOverlayChanged(int overlay);
 
 };
 
