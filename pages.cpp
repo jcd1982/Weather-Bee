@@ -226,9 +226,30 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
                     radarBackgroundColorLayout->addWidget(radarBackgroundColorLabel);
                     radarBackgroundColorLayout->addWidget(m_radarBackgroundColorCombo);
 
+                    ///////////////////////////
+                    QHBoxLayout *radarRefreshIntervalLayout = new QHBoxLayout;
+
+                        QLabel *radarRefreshIntervalLabel = new QLabel(tr("Radar Update Interval:"));
+                        radarRefreshIntervalLabel->setToolTip(tr("Period to wait before requesting new radar Data"));
+                        m_radarRefreshIntervalCombo = new QComboBox(this);
+                        m_radarRefreshIntervalCombo->addItem(tr("5 Minutes"));
+                        m_radarRefreshIntervalCombo->addItem(tr("15 Minutes"));
+                        m_radarRefreshIntervalCombo->addItem(tr("30 Minutes"));
+                        m_radarRefreshIntervalCombo->addItem(tr("45 Minutes"));
+                        m_radarRefreshIntervalCombo->addItem(tr("60 Minutes"));
+
+                        m_radarRefreshIntervalCombo->setCurrentIndex(
+                                    m_radarRefreshIntervalCombo->findText(
+                                        m_settings.value("radarRefreshInterval").toString() ));
+
+                    radarRefreshIntervalLayout->addWidget(radarRefreshIntervalLabel);
+                    radarRefreshIntervalLayout->addWidget(m_radarRefreshIntervalCombo);
+
+                    ////////////////////////////
                 radarElementsLayout->addItem(refreshRateLayout);
                 radarElementsLayout->addItem(radarProductLayout);
                 radarElementsLayout->addItem(radarBackgroundColorLayout);
+                radarElementsLayout->addItem(radarRefreshIntervalLayout);
 
             radarElementsGroup->setLayout(radarElementsLayout);
 
@@ -285,6 +306,7 @@ void ConfigurationPage::saveSettings(){
     m_settings.setValue("radarFrequency", this->m_radarFrequencyCombo->currentText());
     m_settings.setValue("radarProduct", this->m_radarProductCombo->currentText());
     m_settings.setValue("radarBackgroundColor", this->m_radarBackgroundColorCombo->currentText());
+    m_settings.setValue("radarRefreshInterval", this->m_radarRefreshIntervalCombo->currentText());
 
     if(m_radarTreeWidget->currentItem() != nullptr &&
        m_radarTreeWidget->currentItem()->parent() != nullptr){

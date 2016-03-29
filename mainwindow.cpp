@@ -39,20 +39,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    m_overlay_settings.topoEnabled = savedSettings.value("topoEnabled").toBool();
-    m_overlay_settings.cityEnabled = savedSettings.value("cityEnabled").toBool();
-    m_overlay_settings.countiesEnabled = savedSettings.value("countiesEnabled").toBool();
-    m_overlay_settings.highwaysEnabled = savedSettings.value("highwaysEnabled").toBool();
-    m_overlay_settings.legendEnabled = savedSettings.value("legendEnabled").toBool();
-    m_overlay_settings.rangeEnabled = savedSettings.value("rangeEnabled").toBool();
-    m_overlay_settings.riversEnabled = savedSettings.value("riversEnabled").toBool();
-    m_overlay_settings.warningsEnabled = savedSettings.value("warningsEnabled").toBool();
+    m_radar_settings.topoEnabled = savedSettings.value("topoEnabled").toBool();
+    m_radar_settings.cityEnabled = savedSettings.value("cityEnabled").toBool();
+    m_radar_settings.countiesEnabled = savedSettings.value("countiesEnabled").toBool();
+    m_radar_settings.highwaysEnabled = savedSettings.value("highwaysEnabled").toBool();
+    m_radar_settings.legendEnabled = savedSettings.value("legendEnabled").toBool();
+    m_radar_settings.rangeEnabled = savedSettings.value("rangeEnabled").toBool();
+    m_radar_settings.riversEnabled = savedSettings.value("riversEnabled").toBool();
+    m_radar_settings.warningsEnabled = savedSettings.value("warningsEnabled").toBool();
+    m_radar_settings.radarOpacity = savedSettings.value("radarOpacity").toReal();
+    m_radar_settings.radarRefreshInterval = savedSettings.value("radarRefreshInterval").toString().split(QChar(' ')).at(0).toInt();
 
-    m_overlay_settings.radarOpacity = savedSettings.value("radarOpacity").toReal();
+    ui->sliderOpacity->setValue(static_cast<int>(m_radar_settings.radarOpacity * 100));
 
-    ui->sliderOpacity->setValue(static_cast<int>(m_overlay_settings.radarOpacity * 100));
-
-    m_radar_station = new WeatherStation(savedSettings.value("radarStationID").toString(), m_overlay_settings, this);
+    m_radar_station = new WeatherStation(savedSettings.value("radarStationID").toString(), m_radar_settings, this);
 
     m_animation_timer = new QTimer(this);
     int freq = savedSettings.value("radarFrequency").toString().split(QChar(' ')).at(0).toInt();
@@ -83,6 +83,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->radarDisplay->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->radarDisplay->setBaseSize(600, 550);
     ui->radarDisplay->show();
+    ui->radarDisplay->setToolTip("Right-Click for more options");
+    ui->radarDisplay->setToolTipDuration(1500);
+
+    this->resize(600,700);
 
     c = new CurrentConditions(savedSettings.value("zipCode").toString(), this);
     QHBoxLayout *horizontalLayout = new QHBoxLayout;
@@ -208,14 +212,14 @@ void MainWindow::slotRadarMenu(QPoint pos){
     checkWarnings->setStyleSheet("padding: 6px;");
     checkLegend->setStyleSheet("padding: 6px;");
 
-    checkTopography->setChecked(this->m_overlay_settings.topoEnabled);
-    checkCities->setChecked(this->m_overlay_settings.cityEnabled);
-    checkCounties->setChecked(this->m_overlay_settings.countiesEnabled);
-    checkHighways->setChecked(this->m_overlay_settings.highwaysEnabled);
-    checkRivers->setChecked(this->m_overlay_settings.riversEnabled);
-    if (rangeRing) checkRangeRing->setChecked(this->m_overlay_settings.rangeEnabled);
-    checkWarnings->setChecked(this->m_overlay_settings.warningsEnabled);
-    checkLegend->setChecked(this->m_overlay_settings.legendEnabled);
+    checkTopography->setChecked(this->m_radar_settings.topoEnabled);
+    checkCities->setChecked(this->m_radar_settings.cityEnabled);
+    checkCounties->setChecked(this->m_radar_settings.countiesEnabled);
+    checkHighways->setChecked(this->m_radar_settings.highwaysEnabled);
+    checkRivers->setChecked(this->m_radar_settings.riversEnabled);
+    if (rangeRing) checkRangeRing->setChecked(this->m_radar_settings.rangeEnabled);
+    checkWarnings->setChecked(this->m_radar_settings.warningsEnabled);
+    checkLegend->setChecked(this->m_radar_settings.legendEnabled);
 
     QWidgetAction *radarTopographyAction = new QWidgetAction(this);
     QWidgetAction *radarCitiesAction = new QWidgetAction(this);
@@ -274,19 +278,19 @@ void MainWindow::slotOverlayChanged(int overlay){
 
         case 1:{
             qDebug() << "case 1";
-            m_overlay_settings.topoEnabled = !m_overlay_settings.topoEnabled;
-            if(m_overlay_settings.topoEnabled){
+            m_radar_settings.topoEnabled = !m_radar_settings.topoEnabled;
+            if(m_radar_settings.topoEnabled){
                 s.setValue("topoEnabled", "true");
             }else{
                 s.setValue("topoEnabled", "false");
             }
-            qDebug() << m_overlay_settings.topoEnabled;
+            qDebug() << m_radar_settings.topoEnabled;
             break;
         }
         case 2:{
             qDebug() << "case 2";
-            m_overlay_settings.cityEnabled = !m_overlay_settings.cityEnabled;
-            if(m_overlay_settings.cityEnabled){
+            m_radar_settings.cityEnabled = !m_radar_settings.cityEnabled;
+            if(m_radar_settings.cityEnabled){
                 s.setValue("cityEnabled", "true");
             }else{
                 s.setValue("cityEnabled", "false");
@@ -295,8 +299,8 @@ void MainWindow::slotOverlayChanged(int overlay){
         }
         case 3:{
             qDebug() << "case 3";
-            m_overlay_settings.countiesEnabled = !m_overlay_settings.countiesEnabled;
-            if(m_overlay_settings.countiesEnabled){
+            m_radar_settings.countiesEnabled = !m_radar_settings.countiesEnabled;
+            if(m_radar_settings.countiesEnabled){
                 s.setValue("countiesEnabled", "true");
             }else{
                 s.setValue("countiesEnabled", "false");
@@ -305,8 +309,8 @@ void MainWindow::slotOverlayChanged(int overlay){
         }
         case 4:{
             qDebug() << "case 4";
-            m_overlay_settings.highwaysEnabled  = !m_overlay_settings.highwaysEnabled;
-            if(m_overlay_settings.highwaysEnabled){
+            m_radar_settings.highwaysEnabled  = !m_radar_settings.highwaysEnabled;
+            if(m_radar_settings.highwaysEnabled){
                 s.setValue("highwaysEnabled", "true");
             }else{
                 s.setValue("highwaysEnabled", "false");
@@ -315,8 +319,8 @@ void MainWindow::slotOverlayChanged(int overlay){
         }
         case 5:{
             qDebug() << "case 5";
-            m_overlay_settings.riversEnabled = !m_overlay_settings.riversEnabled;
-            if(m_overlay_settings.riversEnabled){
+            m_radar_settings.riversEnabled = !m_radar_settings.riversEnabled;
+            if(m_radar_settings.riversEnabled){
                 s.setValue("riversEnabled", "true");
             }else{
                 s.setValue("riversEnabled", "false");
@@ -325,8 +329,8 @@ void MainWindow::slotOverlayChanged(int overlay){
         }
         case 6:{
             qDebug() << "case 6";
-            m_overlay_settings.rangeEnabled = !m_overlay_settings.rangeEnabled;
-            if(m_overlay_settings.rangeEnabled){
+            m_radar_settings.rangeEnabled = !m_radar_settings.rangeEnabled;
+            if(m_radar_settings.rangeEnabled){
                 s.setValue("rangeEnabled", "true");
             }else{
                 s.setValue("rangeEnabled", "false");
@@ -335,8 +339,8 @@ void MainWindow::slotOverlayChanged(int overlay){
         }
         case 7:{
             qDebug() << "case 7";
-            m_overlay_settings.warningsEnabled = !m_overlay_settings.warningsEnabled;
-            if(m_overlay_settings.warningsEnabled){
+            m_radar_settings.warningsEnabled = !m_radar_settings.warningsEnabled;
+            if(m_radar_settings.warningsEnabled){
                 s.setValue("warningsEnabled", "true");
             }else{
                 s.setValue("warningsEnabled", "false");
@@ -345,8 +349,8 @@ void MainWindow::slotOverlayChanged(int overlay){
         }
         case 8:{
             qDebug() << "case 8";
-            m_overlay_settings.legendEnabled = !m_overlay_settings.legendEnabled;
-            if(m_overlay_settings.legendEnabled){
+            m_radar_settings.legendEnabled = !m_radar_settings.legendEnabled;
+            if(m_radar_settings.legendEnabled){
                 s.setValue("legendEnabled", "true");
             }else{
                 s.setValue("legendEnabled", "false");
@@ -354,8 +358,8 @@ void MainWindow::slotOverlayChanged(int overlay){
             break;
         }
     }
-    m_radar_station->setOverlaySettings(m_overlay_settings);
-    qDebug() << "Supposedly drawing";
+    m_radar_station->setRadarSettings(m_radar_settings);
+
     slotDrawRadar();
 
     return;
@@ -397,7 +401,7 @@ void MainWindow::slotWeatherStationSelected(QString stationId){
 
     m_radar_station->deleteLater();
 
-    m_radar_station = new WeatherStation(stationId, m_overlay_settings, this);
+    m_radar_station = new WeatherStation(stationId, m_radar_settings, this);
     connect(m_radar_station, SIGNAL(signalRadarProductDownloadDone(RadarType)), this, SLOT(slotDrawRadar()));
     connect(ui->pushButtonRefresh, SIGNAL(clicked(bool)), m_radar_station, SLOT(slotRefreshRadarProduct()));
 
@@ -481,9 +485,9 @@ void MainWindow::slotDrawBaseImage(){
 void MainWindow::slotSetRadarOpacity(int opacity){
 
     // TODO: add range check for opacity.
-    this->m_overlay_settings.radarOpacity = static_cast<qreal>(opacity) / 100;
-    m_radar_station->setOverlaySettings(this->m_overlay_settings);
-    qDebug() << "Slider" << opacity << "radar_opacity" << this->m_overlay_settings.radarOpacity;
+    this->m_radar_settings.radarOpacity = static_cast<qreal>(opacity) / 100;
+    m_radar_station->setRadarSettings(this->m_radar_settings);
+    qDebug() << "Slider" << opacity << "radar_opacity" << this->m_radar_settings.radarOpacity;
     if( !ui->checkBoxAnimate->isChecked() ){
         slotDrawRadar();
     }
@@ -497,6 +501,7 @@ void MainWindow::initSettings(){
     settings.setValue("distanceUnits","Miles");             // [Miles|Kilometers]
     settings.setValue("speedUnits","mph");                  // [mph|kph|knots|m/s|ft/s]
     settings.setValue("pressureUnits","inHg");              // [inHg|atm|mb]
+    // TODO: make sure 1 hour and X minutes all work/
     settings.setValue("fcastUpdateInterval", "1 Hour");     // [15 Minutes|30 Minutes|45 Minutes|1 Hour]
 
     settings.setValue("topoEnabled", "true");
@@ -513,6 +518,7 @@ void MainWindow::initSettings(){
     settings.setValue("radarProduct", "Base Refelectivity (N0R)");
     settings.setValue("radarBackgroundColor", "White");
 
+    settings.setValue("radarRefreshInterval", "1 Minutes");     // [15 Minutes|30 Minutes|45 Minutes|60 Minutes]
     return;
 }
 

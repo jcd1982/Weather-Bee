@@ -9,6 +9,7 @@
 #include <QRegularExpression>
 #include <QDebug>
 #include <QPainter>
+#include <QTimer>
 
 #include <list>
 #include <set>
@@ -16,7 +17,7 @@
 #include "radarproduct.h"
 #include "radarimage.h"
 
-struct settings{
+struct RadarSettings{
     bool    topoEnabled,
             cityEnabled,
             countiesEnabled,
@@ -26,6 +27,7 @@ struct settings{
             riversEnabled,
             warningsEnabled;
     qreal   radarOpacity;
+    uint16_t radarRefreshInterval;
 };
 
 class WeatherStation : public QObject
@@ -48,7 +50,7 @@ private:
 
     void renderRadar(QString key, QPixmap* base);
 
-    settings m_overlay_settings;
+    RadarSettings m_overlay_settings;
 
     QNetworkAccessManager *m_nam;
 
@@ -107,12 +109,14 @@ private:
 
     RadarProduct* m_current_radar_product;
 
+    QTimer m_refresh_timer;
+
 public:
 
-    explicit WeatherStation(QString sid, settings o, QObject *parent = 0);
+    explicit WeatherStation(QString sid, RadarSettings o, QObject *parent = 0);
     ~WeatherStation();
 
-    void setOverlaySettings(settings s);
+    void setRadarSettings(RadarSettings s);
     bool setRadarProduct(RadarType rt);
     RadarType getCurrentRadarProductType();
 

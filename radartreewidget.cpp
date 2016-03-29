@@ -39,7 +39,7 @@ void RadarTreeWidget::slotEmitDoubleClick(){
 void RadarTreeWidget::reqRadarIDs(){
 
     QNetworkRequest request;
-    request.setUrl(QUrl("http://www.srh.noaa.gov/jetstream/doppler/ridge_download.htm#radar"));
+    request.setUrl(QUrl("http://www.srh.noaa.gov/jetstream/doppler/ridge_download.html#radar"));
     request.setAttribute(QNetworkRequest::User, QVariant("RadarIDs"));
     this->m_nam->get(request);
 
@@ -71,20 +71,31 @@ void RadarTreeWidget::slotHandleNetworkReplies(QNetworkReply* reply){
     //  and it will be a good idea to provide a source example, i.e. the text being parsed.
     {
         // Need to remove the <script> ... </script> at the end of the xhtml
-        // for the site: "http://www.srh.noaa.gov/jetstream/doppler/ridge_download.htm#radar" in
+        // for the site: "http://www.srh.noaa.gov/jetstream/doppler/ridge_download.htmL#radar" in
         // order to make it valid xml so that the Dom Engine can parse it.
         QString replyHtml(reply->readAll());
 
+        //qDebug() << replyHtml;
+
         //qDebug() << "Radar Sites page:" << replyHtml;
 
-        QStringList replyList = replyHtml.split(QRegExp("<script>"));
+        QStringList replyList = replyHtml.split(QRegExp("</head>"));
+        QString A = replyList.at(1);
+        QStringList B = A.split(QRegExp("\n</select></li></ul>\n\n</div></div>\n\n<nav>\n<ul class=\"pager hidden-print\">\n"));
+        QStringList D = B.at(0).split(QRegExp("<option>yux - Yuma, AZ</option>\n</select>\n</li></ul>\n\n\n<ul class=\"list-unstyled\">\n<li><b>Radars ID's by State</b><br>\n<select size=\"10\">\n"));
+        //qDebug() << "replyList 0" << replyList.at(1);
+        //qDebug() << "replyList 1" << B.at(0);
 
+        QString C = "<html><body>" + D.at(1) + "</body></html>";
+        qDebug() << "PARSING" << C;
+
+        //qDebug() << "replyList 2" << replyList.at(2);
         QDomDocument doc;
         QString errorMsg;
         int errorLine, errorColumn;
 
-        if( !doc.setContent( replyList.at(0), &errorMsg, &errorLine, &errorColumn ) ) {
-            qDebug() << "ERROR IN setContent" << errorMsg << errorLine;
+        if( !doc.setContent( C, &errorMsg, &errorLine, &errorColumn ) ) {
+            qDebug() << "ERROR IN setContent" << errorMsg << "Line" << errorLine << "Col" << errorColumn;
             //TODO: add defaulting
             return;
         }

@@ -4,22 +4,21 @@
 
 class RadarProduct;
 
-WeatherStation::WeatherStation(QString sid, settings o, QObject *parent)
+WeatherStation::WeatherStation(QString sid, RadarSettings settings, QObject *parent)
     : QObject{parent},
       m_station_id{sid},
       m_base_url{"http://radar.weather.gov/ridge"},
       m_current_image_key{""}
 {
-    // TODO: initialize these overlay_settings via primary settings
-    m_overlay_settings.topoEnabled = o.topoEnabled;
-    m_overlay_settings.cityEnabled = o.cityEnabled;
-    m_overlay_settings.countiesEnabled = o.countiesEnabled;
-    m_overlay_settings.highwaysEnabled = o.highwaysEnabled;
-    m_overlay_settings.legendEnabled = o.legendEnabled;
-    m_overlay_settings.rangeEnabled = o.rangeEnabled;
-    m_overlay_settings.riversEnabled = o.riversEnabled;
-    m_overlay_settings.warningsEnabled = o.warningsEnabled;
-    m_overlay_settings.radarOpacity = o.radarOpacity;
+    m_overlay_settings.topoEnabled = settings.topoEnabled;
+    m_overlay_settings.cityEnabled = settings.cityEnabled;
+    m_overlay_settings.countiesEnabled = settings.countiesEnabled;
+    m_overlay_settings.highwaysEnabled = settings.highwaysEnabled;
+    m_overlay_settings.legendEnabled = settings.legendEnabled;
+    m_overlay_settings.rangeEnabled = settings.rangeEnabled;
+    m_overlay_settings.riversEnabled = settings.riversEnabled;
+    m_overlay_settings.warningsEnabled = settings.warningsEnabled;
+    m_overlay_settings.radarOpacity = settings.radarOpacity;
 
     m_base_image_download_done = false;
 
@@ -114,7 +113,13 @@ WeatherStation::WeatherStation(QString sid, settings o, QObject *parent)
     // TODO: follow these lists of QNetworkReply pointers to destruction, make sure they are
     //  deleted properly.
 
+    m_refresh_timer.setInterval(settings.radarRefreshInterval * 60000);
+    m_refresh_timer.start();
+
     connect(this->m_nam, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotHandleNetworkReplies(QNetworkReply*)));
+    connect(&m_refresh_timer, SIGNAL(timeout()), this, SLOT(slotRefreshRadarProduct()));
+    // TODO: make sure m_refresh_timer is disconnected when appropriate.
+
     //connect(this, SIGNAL(signalRadarProductDownloadDone(RadarType)), this, SLOT(slotStartRefreshTimer(RadarType)));
 
     return;
@@ -171,7 +176,7 @@ bool WeatherStation::setRadarProduct(RadarType rt){
     }
 }
 
-void WeatherStation::setOverlaySettings(settings s){
+void WeatherStation::setRadarSettings(RadarSettings s){
 
     qDebug("WeatherStation::setOverlaySettings");
 

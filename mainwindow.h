@@ -34,7 +34,7 @@ private:
     QMenu *fileMenu;
     QAction *exitAction;
 
-    settings m_overlay_settings;
+    RadarSettings m_radar_settings;
     CurrentConditions* c;
 
     SettingsDialog *settingsDialog;

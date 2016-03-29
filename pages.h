@@ -25,6 +25,7 @@ private:
     QLineEdit *m_latLineEdit;
     QLineEdit *m_lonLineEdit;
     QComboBox *m_updateIntervalCombo;
+    QComboBox *m_radarRefreshIntervalCombo;
 
     QLineEdit *zipCodeLineEdit;
     QLineEdit *latLineEdit;
