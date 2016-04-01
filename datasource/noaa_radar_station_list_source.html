@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Online resource for learning about the hows and why of weather. Includes lesson plans.">
+<meta name="author" content="National Weather Service">
+<link rel="icon" href="../images/favicon.ico">
+<title>NWS JetStream - RIDGE Radar Downloads</title>
+<link href="../main.css" rel="stylesheet">
+<style>
+.table .list-unstyled {margin-left:80px}
+.table .list-unstyled li {text-align:left;}
+.table th {font-size:.8em;}
+.table th:nth-child(1) {width:12%}
+.table th:nth-child(2) {width:13%}
+.table th:nth-child(3) {width:25%}
+.table th:nth-child(4) {width:50%}
+select {width:300px; height:300px}
+.site {width:300px; margin:0 auto;}
+</style>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+function jumpAlert(){
+window.alert('You are now leaving the National Weather Service JetStream Website.\n\nThe NWS provides a link to this external web page because it may contain related information of interest to you. \n\nYou can return to the NWS Web site by using the Back button on your Web browser.')
+}
+</script>
+<script type="text/javascript" src="../js/ReView.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<span class="navbar-brand">JetStream</span>
+<div id="tinyheader"><img src="../images/tinyNWS.png">NWS JetStream</div></div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li><a href="../index.html"><span class="jsname">JetStream&nbsp;</span>Home</a></li>
+<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Topics <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+    <li><a href="../atmos/atmos_intro.html">The Atmosphere</a></li>
+    <li><a href="../ocean/ocean_intro.html">The Ocean</a></li>
+    <li><a href="../global/global_intro.html">Global Weather</a></li>
+    <li><a href="../clouds/clouds_intro.html">Clouds</a></li>
+    <li><a href="../upperair/upperair_intro.html">The Upper Air</a></li>
+    <li><a href="../synoptic/synoptic_intro.html">Synoptic Meteorology</a></li>
+    <li><a href="../tstorms/tstorms_intro.html">Thunderstorms</a></li>
+    <li><a href="../lightning/lightning_intro.html">Lightning</a></li>
+    <li><a href="../derechos/derecho_intro.html">Derechos</a></li>
+    <li><a href="../tropics/tropics_intro.html">Tropical Weather</a></li>
+    <li><a href="doppler_intro.html">Doppler Radar</a></li>
+    <li><a href="../remote/remote_intro.html">Remote Sensing</a></li>
+    <li><a href="../tsunami/tsunami_intro.html">Tsunamis</a></li>
+    <li><a href="../nws/nws_intro.html">The National Weather Service</a></li>
+    <li><a href="../append/append_intro.html">Appendix</a></li>
+    </ul></li>
+<li><a href="../matrix.html">Topic Matrix</a></li>
+<li><a href="../append/lessonplans.html">Lesson Plan Overview</a></li>
+<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NWS Info <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+    <li><a href="http://www.weather.gov">NWS Home</a></li>
+    <li><a href="http://www.weather.gov/forecastmaps">Forecasts</a></li>
+    <li><a href="http://www.nws.noaa.gov/climate">Past Weather</a></li>
+    <li><a href="http://www.weather.gov/safety">Weather Safety</a></li>
+    <li><a href="http://www.weather.gov/informationcenter">Information Center</a></li>
+    <li><a href="http://www.weather.gov/news">NWS News</a></li>
+    <li><a href="http://www.weather.gov/search">Search</a></li>
+    <li><a href="http://www.weather.gov/about">About</a></li>
+    </ul></li></ul>
+<div class="navbar-form navbar-right hidden-sm" id="fcst-search">
+<form name="getForecast" id="getForecast" class="form-inline" role="form" action="http://forecast.weather.gov/zipcity.php" method="get">
+<div id="getfcst-body"><i>my</i>Forecast&nbsp;
+<input name="inputstring" type="text" required="required" class="form-control" id="inputstring" placeholder="City, ST or zip code" />
+<input name="btnSearch" id="btnSearch" class="btn btn-default" type="submit" value="Go" />
+</div></form>
+</div>
+</div><!--/.nav-collapse --></div>
+</nav>
+
+<div class="container content">
+<header class="row">
+<div id="docyes"><img src="../images/nwsbanner_doc.png" alt=""></div>
+<div id="docno"><img src="../images/nwsbanner_nodoc.png" alt=""><hr></div>
+</header>
+
+<div class="row">
+<div class="col-sm-9">
+<div class="blog-post">
+<h2>Downloading RIDGE Radar Images</h2>
+
+<p>Unlike the old radar display, &quot;right clicking&quot; on a RIDGE radar image will only allow you to copy or &quot;save to the clipboard&quot; the very top layer, based upon the selected overlays. In the toggle overlay section, just below the radar image, the <i>right most</i> selected overlay is the top image.</p>
+
+<figure><img src="images/overlays1.gif" class="img-responsive" alt="" width="509" height="40"><figcaption>The right most overlay selected is the top image. In this case it is &quot;Legend&quot;.</figcaption></figure>
+
+<p>In the example above, the &quot;Legend&quot; graphic is the top image selected. Trying to save the RIDGE image will only save the legend graphic. In the toggle overlay example (below), the &quot;Cities&quot; overlay is the top graphic and the only one that can be saved by selecting the image.</p>
+
+<figure><img src="images/overlays2.gif" class="img-responsive" alt="" width="509" height="40"><figcaption>The right most overlay selected is the top image. In this case it is &quot;Cities&quot;.</figcaption></figure>
+
+<p>A typical RIDGE radar view is comprised of seven individual images layered on top of each other through the use of style sheets. Except for the topography, these images are a &quot;gif&quot; format with a white background that has been made transparent. (The topography image is a compressed jpeg image.) To reproduce the RIDGE radar image, each layer needs to be captured and stacked on top of each other.</p>
+
+<p>But it is not as bad as it sounds as fortunately, for any one radar site, once a copy of the overlays are obtained, only the radar image and the &quot;Warnings&quot; and &quot;Legend&quot; overlays change. The &quot;Highways&quot;, &quot;Topo&quot;, &quot;Counties&quot;, &quot;Rivers&quot;, and &quot;Cities&quot; overlays only needed to be downloaded once.</p>
+
+<p>At present, there are three ways to obtain images from the RIDGE radar.</p>
+<ol>
+<li><b>Grunt method</b>. Use the overlay toggles and &quot;right click&quot; on each layer to save it to the local computer. Remember, this only saves the <em>right-most</em> image as indicated by the toggle bar.</li>
+<li><b>Screen Capture</b>. Use the toggle overlays to configure the image then use a screen capture utility to save the image to the local computer. This saves the steps needed to stack the images onto of each other in a graphics program and is also how all the RIDGE images used in this section were obtained.</li>
+<li><b>Download the individual files</b>. All RIDGE radar images are downloadable and all that is needed is the URL. The table (below) provides the paths to each image. For the radar image, legend, or warnings images, the most recent graphic available ends in &quot;_0.gif&quot;. For example, the most recent radar image for the Fort Worth Doppler radar is...
+
+<div class="text-center b">http://radar.weather.gov/ridge/RadarImg/N0R/FWS_N0R_0.gif</div>
+To view and retrieve the 20 most recent radar images then the URL is...
+<div class="text-center b">http://radar.weather.gov/ridge/RadarImg/N0R/FWS/</div>
+
+The filename format for these recent images is: xxx_YYYYMMDD_hhmm_N??.gif, where<br>
+xxx - Radar site ID<br>
+YYYY - year<br>
+MM - month<br>
+DD - day<br>
+hh - hour<br>
+mm - minutes<br>
+N?? - image ID (N0R, N0S, etc)</li>
+</ol>
+
+<h3>Ridge Graphics</h3>
+<p>The paths to the RIDGE graphics/images are <b>http://radar.weather.gov/ridge</b> (then)...</p>
+<div class="table-responsive"><table class="table table-bordered table-centered">
+<tr>
+<th>Directory</th>
+<th>Image ID</th>
+<th>Directory (for past images)<br>or<br>Filename (for current image)</th>
+<th scope="col">Legend</th>
+</tr>
+
+<tr>
+<td rowspan="14">/RadarImg</td>
+<td rowspan="2">/N0R</td>
+<td class="image graylight">/xxx</td>
+<td rowspan="14">
+<ul class="list-unstyled">
+<li><b>xxx</b>: Radar site ID</li>
+</ul>
+
+Short Range images (views out to 124 nmi)
+<ul class="list-unstyled">
+<li><b>N0R</b>: Base Reflectivity</li>
+<li><b>N0S</b>: Storm Relative Motion</li>
+<li><b>N0V</b>: Base Velocity</li>
+<li><b>N1P</b>: One-Hour Precipitation</li>
+<li><b>NCR</b>: Composite Reflectivity</li>
+<li><b>NTP</b>: Storm Total Precipitation</li>
+</ul>
+
+Long Range image (view out to 248 nmi)
+<ul class="list-unstyled">
+<li><b>N0Z</b>: Base Reflectivity</li>
+</ul>
+
+The file name format for past images is as follows:<br>
+<div class="text-center b">xxx_YYYYMMDD_hhmm_N??.gif</div> where...<br>
+
+<ul class="list-unstyled">
+<li><b>YYYY</b>: year</li>
+<li><b>MM</b>: month</li>
+<li><b>DD</b>: day</li>
+<li><b>hh</b>: hour</li>
+<li><b>mm</b>: minutes</li>
+<li><b>N??</b>: image ID (N0R, N0S, etc)</li>
+</ul></td>
+</tr>
+
+<tr>
+<td>/xxx_N0R_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/N0S</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N0S_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/N0V</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N0V_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/N0Z</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N0Z_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/N1P</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N1P_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/NCR</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td >/xxx_NCR_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/NTP</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_NTP_0.gif</td>
+</tr>
+</table></div>
+
+<h3>Ridge Overlays</h3>
+<p>The paths to the RIDGE overlays are <b>http://radar.weather.gov/ridge</b> (then)...</p>
+<div class="table-responsive"><table class="table table-bordered table-centered">
+<tr>
+<th>Directory</th>
+<th>Overlay<br>Directory</th>
+<th>Directory (for short range)<br>or<br>Directory (for long range)</th>
+<th>Filename</th>
+</tr>
+
+<tr>
+<td rowspan="9">/Overlays</td>
+<td rowspan="2">/Topo</td>
+<td>/Short</td>
+<td>/xxx_Topo_Short.jpg</td>
+</tr>
+
+<tr>
+<td>/Long</td>
+<td>/xxx_Topo_Long.jpg</td>
+</tr>
+
+<tr>
+<td rowspan="2">/County</td>
+<td>/Short</td>
+<td>/xxx_County_Short.gif</td>
+</tr>
+
+<tr>
+<td>/Long</td>
+<td>/xxx_County_Long.gif</td>
+</tr>
+
+<tr>
+<td>/Rivers</td>
+<td>/Short</td>
+<td>/xxx_Rivers_Short.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/Highways</td>
+<td>/Short</td>
+<td>/xxx_Highways_Short.gif</td>
+</tr>
+
+<tr>
+<td>/Long</td>
+<td>/xxx_Highways_Long.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2">/Cities</td>
+<td>/Short</td>
+<td>/xxx_City_Short.gif</td>
+</tr>
+
+<tr>
+<td>/Long</td>
+<td>/xxx_City_Long.gif</td>
+</tr>
+</table></div>
+
+<h3>Warnings Overlay</h3>
+<p>The paths to the NWS severe weather warnings overlays are <b>http://radar.weather.gov/ridge</b> (then)...</p>
+<div class="table-responsive"><table class="table table-bordered table-centered">
+<tr>
+<th>Directory</th>
+<th>Directory</th>
+<th>Directory (for past images)<br>or<br>Filename (for current image)</th>
+<th scope="col">Legend</th>
+</tr>
+
+<tr>
+<td rowspan="4">/Warnings</td>
+<td rowspan="2">/Short</td>
+<td>/xxx</td>
+<td rowspan="4">
+<ul class="list-unstyled">
+<li><b>xxx</b>: <a href="#radar">Radar site ID</a></li>
+</ul>
+
+The file name format for past images is as follows:<br>
+<div class="text-center b">xxx_YYYYMMDD_hhmm_N??_Warnings.gif</div> where...<br>
+
+<ul class="list-unstyled">
+<li><b>YYYY</b>: year</li>
+<li><b>MM</b>: month</li>
+<li><b>DD</b>: day</li>
+<li><b>hh</b>: hour</li>
+<li><b>mm</b>: minutes</li>
+<li><b>N??</b>: image ID (N0R, N0S, etc)</li>
+</ul></td>
+</tr>
+
+<tr>
+<td>/xxx_Warnings_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" align="center">/Long</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_Warnings_0.gif</td>
+</tr>
+</table></div>
+
+<h3>Legend Overlays</h3>
+<p>The paths to the RIDGE legend overlays are <b>http://radar.weather.gov/ridge</b> then</p>
+<div class="table-responsive"><table class="table table-bordered table-centered">
+<tr>
+<th>Directory</th>
+<th>Image ID</th>
+<th>Directory (for past images)<br>or<br>Filename (for current image)</th>
+<th scope="col">Legend</th>
+</tr>
+
+<tr>
+<td rowspan="14">&nbsp;/Legend&nbsp;</td>
+<td rowspan="2">/N0R</td>
+<td>/xxx</td>
+<td rowspan="14">
+<ul class="list-unstyled">
+<li><b>xxx</b>: <a href="#radar">Radar site ID</a></li>
+</ul>
+
+Short Range images (views out to 124 nmi)
+<ul class="list-unstyled">
+<li><b>N0R</b>: Base Reflectivity</li>
+<li><b>N0S</b>: Storm Relative Motion</li>
+<li><b>N0V</b>: Base Velocity</li>
+<li><b>N1P</b>: One-Hour Precipitation</li>
+<li><b>NCR</b>: Composite Reflectivity</li>
+<li><b>NTP</b>: Storm Total Precipitation</li>
+</ul>
+
+Long Range image (view out to 248 nmi)
+<ul class="list-unstyled">
+<li><b>N0Z</b>: Base Reflectivity</li>
+<li><b>N0S</b>: Storm Relative Motion</li>
+<li><b>N0V</b>: Base Velocity</li>
+<li><b>N1P</b>: One-Hour Precipitation</li>
+<li><b>NCR</b>: Composite Reflectivity</li>
+<li><b>NTP</b>: Storm Total Precipitation</li>
+</ul>
+
+The file name format for past images is as follows:<br>
+<div class="text-center b">xxx_YYYYMMDD_hhmm_N??_Legend.gif</div> where...<br>
+
+<ul class="list-unstyled">
+<li><b>YYYY</b>: year</li>
+<li><b>MM</b>: month</li>
+<li><b>DD</b>: day</li>
+<li><b>hh</b>: hour</li>
+<li><b>mm</b>: minutes</li>
+<li><b>N??</b>: image ID (N0R, N0S, etc)</li>
+</ul></td>
+</tr>
+
+<tr>
+<td>/xxx_N0R_Legend_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" align="center">/N0S</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N0S_Legend_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" class="graydark" align="center">/N0V</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N0V_Legend_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" align="center">/N0Z</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N0Z_Legend_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" class="graydark" align="center">/N1P</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_N1P_Legend_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" align="center">/NCR</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_NCR_Legend_0.gif</td>
+</tr>
+
+<tr>
+<td rowspan="2" class="graydark" align="center">/NTP</td>
+<td>/xxx</td>
+</tr>
+
+<tr>
+<td>/xxx_NTP_Legend_0.gif</td>
+</tr>
+</table></div>
+
+<div class="site">
+<ul class="list-unstyled">
+<li><b>Radars ID's by Site</b><br>
+<select size="10">
+<option>abc - Bethel, AK</option>
+<option>abr - Aberdeen, SD</option>
+<option>abx - La Mesita Negra/Albuquerque, NM</option>
+<option>acg - Sitka, AK</option>
+<option>aec - Nome, AK</option>
+<option>ahg - Anchorage/Kenei, AK</option>
+<option>aih - Middleton Islands, AK</option>
+<option>akc - King Salmon, AK</option>
+<option>akq - Wakefield/Norfolk-Richmond, VA</option>
+<option>ama - Amarillo, TX</option>
+<option>amx - Miami, FL</option>
+<option>apd - Fairbanks, AK</option>
+<option>apx - Alpena/Gaylord, MI</option>
+<option>arx - LaCrosse, WI</option>
+<option>atx - Everett/Seattle-Tacoma, WA</option>
+<option>bbx - Beale AFB, CA</option>
+<option>bgm - Binghamton, NY</option>
+<option>bhx - Eureka, CA</option>
+<option>bis - Bismarck, ND</option>
+<option>blx - Billings, MT</option>
+<option>bmx - Shelby County AP/Birmingham, AL</option>
+<option>box - Taunton/Boston, MA</option>
+<option>bro - Brownsville, TX</option>
+<option>buf - Buffalo, NY</option>
+<option>byx - Key West, FL</option>
+<option>cae - Columbia, SC</option>
+<option>cbw - Caribou (Loring AFB), ME</option>
+<option>cbx - Boise, ID</option>
+<option>ccx - Moshannon St Forest/State College, PA</option>
+<option>cle - Cleveland, OH</option>
+<option>clx - Charleston, SC</option>
+<option>crp - Corpus Christi, TX</option>
+<option>cxx - Burlington, VT</option>
+<option>cys - Cheyenne, WY</option>
+<option>dax - McClellan AFB/Sacremento, CA</option>
+<option>ddc - Dodge City, KS</option>
+<option>dfx - Bracketville/Laughlin AFB, TX</option>
+<option>dgx - Jackson/Brandon, MS</option>
+<option>dix - Fort Dix, NJ/Philadelphia, PA</option>
+<option>dlh - Duluth, MN</option>
+<option>dmx - Acorn Valley/Des Moines, IA</option>
+<option>dox - Dover AFB, DE</option>
+<option>dtx - Pontiac/Detroit, MI</option>
+<option>dvn - Davenport/Quad Cities, IA</option>
+<option>dyx - Moran/Dyess AFB, TX</option>
+<option>eax - Pleasant Hill/KC, MO</option>
+<option>emx - Tucson, AZ</option>
+<option>enx - East Berne/Albany, NY</option>
+<option>eox - Ft. Rucker, AL</option>
+<option>epz - El Paso, TX</option>
+<option>esx - Las Vegas, NV</option>
+<option>evx - Red Bay/Eglin AFB, FL</option>
+<option>ewx - New Braunfels AP/Austin-San Ant, TX</option>
+<option>eyx - Edwards AFB, CA</option>
+<option>fcx - Roanoke, VA</option>
+<option>fdr - Frederick, OK</option>
+<option>fdx - Field Village/Cannon AFB, NM</option>
+<option>ffc - Peach Tree City/Atlanta, GA</option>
+<option>fsd - Sioux Falls, SD</option>
+<option>fsx - Flagstaff, AZ</option>
+<option>ftg - Front Range AP/Denver, CO</option>
+<option>fws - Spinks AP/Dallas-Ft Worth, TX</option>
+<option>ggw - Glasgow, MT</option>
+<option>gjx - Grand Junction, CO</option>
+<option>gld - Goodland, KS</option>
+<option>grb - Green Bay, WI</option>
+<option>grk - Central Texas (Ft Hood), TX</option>
+<option>grr - Grand Rapids/Muskegon, MI</option>
+<option>gsp - Greenville/Spartanburg (Greer), SC</option>
+<option>gua - Andersen AFB, Guam</option>
+<option>gwx - Columbus AFB, MS</option>
+<option>gyx - Gray/Portland, ME</option>
+<option>hdx - Holloman AFB, NM</option>
+<option>hgx - League City/Houston, TX</option>
+<option>hki - South Kauai, HI</option>
+<option>hkm - Kohala, HI</option>
+<option>hmo - Molokai, HI</option>
+<option>hnx - Hanford AP/San Joaquin Valley, CA</option>
+<option>hpx - Ft. Campbell, KY</option>
+<option>htx - N.E./Hytop, AL</option>
+<option>hwa - South Hawaii, HI</option>
+<option>ict - Wichita, KS</option>
+<option>icx - Cedar City, UT</option>
+<option>iln - Wilmington/Cincinnati, OH</option>
+<option>ilx - Central (Springfield), IL</option>
+<option>ind - Indianapolis, IN</option>
+<option>inx - Shreck Farm/Tulsa, OK</option>
+<option>iwa - Williams AFB/Phoenix, AZ</option>
+<option>iwx - Webster, IN</option>
+<option>jax - Jacksonville, FL</option>
+<option>jgx - Robins AFB, GA</option>
+<option>jkl - Jackson, KY</option>
+<option>jua - San Juan, PR</option>
+<option>lbb - Lubbock, TX</option>
+<option>lch - Lake Charles, LA</option>
+<option>lgx - Langley Hill, WA</option>
+<option>lix - Slidell AP/New Orleans, LA</option>
+<option>lnx - North Platte, NE</option>
+<option>lot - Chicago, IL</option>
+<option>lrx - Elko, NV</option>
+<option>lsx - St Charles City/St Louis, MO</option>
+<option>ltx - Shallotte/Wilmington, NC</option>
+<option>lvx - Ft Knox Mil Res/Louisville, KY</option>
+<option>lwx - Sterling, VA/Washington DC</option>
+<option>lzk - Little Rock, AR</option>
+<option>maf - Midland/Odessa, TX</option>
+<option>max - Medford, OR</option>
+<option>mbx - Minot AFB, ND</option>
+<option>mhx - Newport/Morehead City, NC</option>
+<option>mkx - Sullivan Township/Milwaukee, WI</option>
+<option>mlb - Melbourne, FL</option>
+<option>mob - Mobile, AL</option>
+<option>mpx - Chanhassen Township/Minn-St.P, MN</option>
+<option>mqt - Marquette, MI</option>
+<option>mrx - Knoxville, TN</option>
+<option>msx - Pt Six Mtn/Missoula, MT</option>
+<option>mtx - Promontory Pt/Salt Lake City, UT</option>
+<option>mux - Mt Umunhum/San Francisco, CA</option>
+<option>mvx - Fargo, ND</option>
+<option>mxx - Carrville/Maxwell AFB, AL</option>
+<option>nkx - San Diego, CA</option>
+<option>nqa - Millington NAS/Memphis, TN</option>
+<option>oax - Omaha, NE</option>
+<option>ohx - Old Hickory Mt/Nashville, TN</option>
+<option>okx - Brookhaven/New York City, NY</option>
+<option>otx - Spokane, WA</option>
+<option>pah - Paducah, KY</option>
+<option>pbz - Coraopolis/Pittsburgh, PA</option>
+<option>pdt - Pendleton, OR</option>
+<option>poe - Ft Polk, LA</option>
+<option>pux - Pueblo, CO</option>
+<option>rax - Triple West AP/Raleigh-Durham, NC</option>
+<option>rgx - Virginia Peak/Reno, NV</option>
+<option>riw - Riverton, WY</option>
+<option>rlx - Charleston, WV</option>
+<option>rtx - Portland, OR</option>
+<option>sfx - Pocatello/Idaho falls, ID</option>
+<option>sgf - Springfield, MO</option>
+<option>shv - Shreveport, LA</option>
+<option>sjt - San Angelo, TX</option>
+<option>sox - Santa Ana Mountains/March AFB, CA</option>
+<option>srx - Western Arkansas/Ft. Smith, AR</option>
+<option>tbw - Ruskin/Tampa Bay, FL</option>
+<option>tfx - Great Falls, MT</option>
+<option>tlh - Tallahassee, FL</option>
+<option>tlx - Twin Lakes/Oklahoma City, OK</option>
+<option>twx - Wabaunsee County/Topeka, KS</option>
+<option>tyx - Ft Drum AFB/Montague, NY</option>
+<option>udx - Rapid City, SD</option>
+<option>uex - Grand Island, NE</option>
+<option>vax - Moody AFB, GA</option>
+<option>vbx - Vandenberg AFB, CA</option>
+<option>vnx - Vance AFB, OK</option>
+<option>vtx - Sulphur Mtn/Los Angeles, CA</option>
+<option>vwx - Evansville, IN</option>
+<option>yux - Yuma, AZ</option>
+</select>
+</li></ul>
+
+
+<ul class="list-unstyled">
+<li><b>Radars ID's by State</b><br>
+<select size="10">
+<optgroup label="Alabama">
+<option>bmx - Birmingham</option>
+<option>eox - Fort Rucker</option>
+<option>htx - Nrn. Alabama</option>
+<option>mob - Mobile</option>
+<option>mxx - E. Alabama</option></optgroup>
+<optgroup label="Alaska">
+<option>abc - Bethel</option>
+<option>acg - Sitka/Biorka Is.</option>
+<option>aec - Nome</option>
+<option>ahg - Kenai</option>
+<option>aih - Middleton Is.</option>
+<option>akc - King Salmon</option>
+<option>apd - Fairbanks/Pedro Dome</option></optgroup>
+<optgroup label="Arizona">
+<option>emx - Tucson</option>
+<option>fsx - Flagstaff</option>
+<option>iwa - Phoenix</option>
+<option>yux - Yuma</option></optgroup>
+<optgroup label="Arkansas">
+<option>lzk - Little Rock</option>
+<option>srx - W. Ark./Ft. Smith</option></optgroup>
+<optgroup label="California">
+<option>bbx - Beale AFB</option>
+<option>bhx - Eureka</option>
+<option>dax - Sacramento</option>
+<option>eyx - Edwards AFB</option>
+<option>hnx - Hanford/San Joaquin Vly.</option>
+<option>mux - San Francisco Bay Area</option>
+<option>nkx - San Diego</option>
+<option>sox - Santa Ana Mtns</option>
+<option>vbx - Vandenberg AFB</option>
+<option>vtx - Los Angeles/Oxnard</option></optgroup>
+<optgroup label="Colorado">
+<option>ftg - Denver/Boulder</option>
+<option>gjx - Grand Junction</option>
+<option>pux - Pueblo</option></optgroup>
+<optgroup label="Delaware">
+<option>dox - Dover AFB</option></optgroup>
+<optgroup label="Florida">
+<option>amx - Miami</option>
+<option>byx - Key West</option>
+<option>evx - Eglin AFB/NW Florida</option>
+<option>jax - Jacksonville</option>
+<option>mlb - Melbourne</option>
+<option>tlh - Tallahassee</option>
+<option>tbw - Tampa Bay Area</option></optgroup>
+<optgroup label="Georgia">
+<option>ffc - Atlanta/Peachtree City</option>
+<option>jgx - Robins AFB</option>
+<option>vax - Moody AFB</option></optgroup>
+<optgroup label="Guam">
+<option>gua - Andersen AFB</option></optgroup>
+<optgroup label="Hawaii">
+<option>hki - Kauai</option>
+<option>hkm - Kohala</option>
+<option>hmo - Molokai</option>
+<option>hwa - South Shore</option></optgroup>
+<optgroup label="Idaho">
+<option>cbx - Boise</option>
+<option>sfx - Pocatello</option></optgroup>
+<optgroup label="Illinois">
+<option>ilx - Central IL</option>
+<option>lot - Chicago</option></optgroup>
+<optgroup label="Indiana">
+<option>ind - Indianapolis</option>
+<option>iwx - Nrn. Indiana</option>
+<option>vwx - Evansville</option></optgroup>
+<optgroup label="Iowa">
+<option>dmx - Des Moines</option>
+<option>dvn - Quad Cities</option></optgroup>
+<optgroup label="Kansas">
+<option>ddc - Dodge City</option>
+<option>gld - Goodland</option>
+<option>ict - Wichita</option>
+<option>twx - Topeka</option></optgroup>
+<optgroup label="Kentucky">
+<option>hpx - Fort Cambell</option>
+<option>jkl - Jackson</option>
+<option>lvx - Louisville</option>
+<option>pah - Paducah</option></optgroup>
+<optgroup label="Louisiana">
+<option>lch - Lake Charles</option>
+<option>lix - New Orleans</option>
+<option>poe - Fort Polk</option>
+<option>shv - Shreveport</option></optgroup>
+<optgroup label="Maine">
+<option>cbw - Caribou</option>
+<option>gyx - Portland</option></optgroup>
+<optgroup label="Maryland">
+<option>lwx - Baltimore</option></optgroup>
+<optgroup label="Massachusetts">
+<option>box - Boston</option></optgroup>
+<optgroup label="Michigan">
+<option>apx - Gaylord</option>
+<option>dtx - Detroit</option>
+<option>grr - Grand Rapids</option>
+<option>mqt - Marquette</option></optgroup>
+<optgroup label="Minnesota">
+<option>dlh - Duluth</option>
+<option>mpx - Minneapolis</option></optgroup>
+<optgroup label="Mississippi">
+<option>dgx - Jackson/Brandon</option>
+<option>gwx - Columbus AFB</option></optgroup>
+<optgroup label="Missouri">
+<option>eax - Kansas City</option>
+<option>lsx - St. Louis</option>
+<option>sgf - Springfield</option></optgroup>
+<optgroup label="Montana">
+<option>blx - Billings</option>
+<option>ggw - Glasgow</option>
+<option>msx - Missoula</option>
+<option>tfx - Great Falls</option></optgroup>
+<optgroup label="Nebraska">
+<option>lnx - North Platte</option>
+<option>oax - Omaha</option>
+<option>uex - Hastings</option></optgroup>
+<optgroup label="Nevada">
+<option>esx - Las Vegas</option>
+<option>lrx - Elko</option>
+<option>rgx - Reno</option></optgroup>
+<optgroup label="New Jersey">
+<option>dix - Mt. Holly</option></optgroup>
+<optgroup label="New Mexico">
+<option>abx - Albuquerque</option>
+<option>fdx - Cannon AFB</option>
+<option>hdx - Holloman AFB</option></optgroup>
+<optgroup label="New York">
+<option>bgm - Binghamton</option>
+<option>buf - Buffalo</option>
+<option>enx - Albany</option>
+<option>okx - New York City/Upton</option>
+<option>tyx - Montague</option></optgroup>
+<optgroup label="North Carolina">
+<option>ltx - Wilmington</option>
+<option>mhx - Morehead City</option>
+<option>rax - Raleigh/Durham</option></optgroup>
+<optgroup label="North Dakota">
+<option>bis - Bismarck</option>
+<option>mbx - Minot AFB</option>
+<option>mvx - Grand Forks</option></optgroup>
+<optgroup label="Ohio">
+<option>cle - Cleveland</option>
+<option>iln - Wilmington/Dayton</option></optgroup>
+<optgroup label="Oklahoma">
+<option>fdr - Frederick</option>
+<option>inx - Tulsa</option>
+<option>tlx - Oklahoma City</option>
+<option>vnx - Vance AFB</option></optgroup>
+<optgroup label="Oregon">
+<option>max - Medford</option>
+<option>pdt - Pendleton</option>
+<option>rtx - Portland</option></optgroup>
+<optgroup label="Pennsylvania">
+<option>ccx - State College</option>
+<option>dix - Philadelphia</option>
+<option>pbz - Pittsburgh</option></optgroup>
+<optgroup label="Puerto Rico">
+<option>jua - Puerto Rico/V.I.</option></optgroup>
+<optgroup label="South Carolina">
+<option>cae - Columbia</option>
+<option>clx - Charleston</option>
+<option>gsp - Greenville/Spartanburg</option></optgroup>
+<optgroup label="South Dakota">
+<option>abr - Aberdeen</option>
+<option>fsd - Sioux falls</option>
+<option>udx - Rapid City</option></optgroup>
+<optgroup label="Tennessee">
+<option>mrx - Knoxville/Tri Cities</option>
+<option>nqa - Memphis</option>
+<option>ohx - Nashville</option></optgroup>
+<optgroup label="Texas">
+<option>ama - Amarillo</option>
+<option>bro - Brownsville</option>
+<option>crp - Corpus Christi</option>
+<option>dfx - Laughlin AFB</option>
+<option>dyx - Dyess AFB</option>
+<option>epz - El Paso</option>
+<option>ewx - Austin/San Antonio</option>
+<option>fws - Dallas/Fort Worth</option>
+<option>grk - Central Texas</option>
+<option>hgx - Houston/Galveston</option>
+<option>lbb - Lubbock</option>
+<option>maf - Midland/Odessa</option>
+<option>sjt - San Angelo</option></optgroup>
+<optgroup label="Utah">
+<option>icx - Cedar City</option>
+<option>mtx - Salt Lake City</option></optgroup>
+<optgroup label="Vermont">
+<option>cxx - Burlington</option></optgroup>
+<optgroup label="Virginia">
+<option>akq - Norfolk/Richmond</option>
+<option>fcx - Blacksburg/Roanoke</option>
+<option>lwx - Sterling</option></optgroup>
+<optgroup label="Washington">
+<option>atx - Seattle/Tacoma</option>
+<option>lgx - Langley Hill</option>
+<option>otx - Spokane</option></optgroup>
+<optgroup label="Washington DC">
+<option>lwx - Washington</option></optgroup>
+<optgroup label="West Virginia">
+<option>rlx - Charleston</option></optgroup>
+<optgroup label="Wisconsin">
+<option>arx - La Crosse</option>
+<option>grb - Green Bay</option>
+<option>mkx - Milwaukee</option></optgroup>
+<optgroup label="Wyoming">
+<option>cys - Cheyenne</option>
+<option>riw - Riverton</option></optgroup>
+</select></li></ul>
+
+</div></div>
+
+<nav>
+<ul class="pager hidden-print">
+<li><a href="precip.html">Previous</a></li>
+<li><a class="button reView" href="#">Desktop View</a></li>
+<li><a href="gis.html">Next</a></li>
+</ul>
+</nav>
+</div>
+
+<div class="col-sm-3 blog-sidebar">
+<div class="sidebar-module hidden-print">
+<h4>Doppler Radar</h4>
+<ol class="list-unstyled">
+<li><a href="doppler_intro.html">Introduction</a></li>
+<li><a href="how.html">How Radar Works</a></li>
+<li>Radar Images:
+	<ul class="list-unstyled">
+	<li class="maxnav"><a href="refl.html">Reflectivity</a></li>
+	<li class="maxnav"><a href="vel.html">Velocity</a></li>
+	<li class="maxnav"><a href="precip.html">Precipitation</a></li></ul></li>
+<li><a href="ridge.html">RIDGE</a></li>
+<li><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Downloading</li>
+<li><a href="gis.html">The GIS(t) of it All</a></li>
+<li><a href="radarfaq.html">Radar Faq's</a></li>
+<li><a href="doppler_review.html">Review Questions</a></li>
+</ol>
+</div>
+</div>
+</div><!-- end row -->
+
+<footer>
+<div class="row">
+<div class="col-md-2 col-sm-2 hidden-xs"><a href="http://www.usa.gov"><img src="../images/usagov_logo.png" alt="USA gov - Government made easy"></a></div>
+
+<div class="col-md-4 col-sm-4"><img src="../images/bothIcons.png" class="visible-xs pull-right" alt="">
+<ul>
+<li>US Dept of Commerce<br>
+National Oceanic and Atmospheric Administration<br>
+National Weather Service<br>
+1325 East West Highway<br>
+Silver Spring, MD 20910</li>
+</ul>
+</div>
+
+<div class="col-md-3 col-sm-3 hidden-xs">
+<ul>
+<li><a href="http://weather.gov/disclaimer">Disclaimer</a></li>
+<li><a href="http://www.cio.noaa.gov/Policy_Programs/info_quality.html">Information Quality</a></li>
+<li><a href="http://weather.gov/help">Help</a></li>
+<li><a href="http://www.weather.gov/glossary">Glossary</a></li>
+</ul>
+</div>
+
+<div class="col-md-3 col-sm-3 hidden-xs">
+<ul>
+<li><a href="http://weather.gov/privacy">Privacy Policy</a></li>
+<li><a href="http://www.rdc.noaa.gov/~foia">Freedom of Information Act (FOIA)</a></li>
+<li><a href="http://weather.gov/about">About Us</a></li>
+<li><a href="http://weather.gov/careers">Career Opportunities</a></li>
+</ul>
+</div>
+</div><!-- end row -->
+</footer><!-- end footer -->
+</div><!-- end content -->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56463405-2', 'auto');
+  ga('send', 'pageview');
+</script>

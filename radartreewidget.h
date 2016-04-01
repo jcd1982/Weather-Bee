@@ -20,7 +20,7 @@ private:
 
     void init();
     void reqRadarIDs();
-    void parseRadarIDs();
+    void parseRadarIDs(QString replyHtml, bool fallback=false);
 
     bool m_isValid;
     SCNetworkAccessManager *m_nam;
